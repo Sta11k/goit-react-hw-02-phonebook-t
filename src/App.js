@@ -64,6 +64,8 @@ class App extends Component {
   render() {
     // const {  contactsOll } = this.state;
     const visibleContacts = this.getVisibleContacts();
+    console.log(this.state.contactsOll);
+
     return (
       <div className="App">
         <Form propOnSubmit={this.hendlerSubmitForm} />
