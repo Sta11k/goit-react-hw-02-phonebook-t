@@ -28,9 +28,8 @@ ul {
   border: 2px solid rebeccapurple;
 }
 
-/* .description {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-} */
+.App {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -43,7 +43,8 @@ class Form extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSabmit}>
+      <form onSubmit={this.handleSabmit} className={s.m}>
+        <h2 className={s.title}>Phonebook</h2>
         <label htmlFor={this.contactIdName} className={s.form__name}>
           Name
           <input
@@ -113,7 +114,7 @@ class Form extends Component {
             Last
           </label>
         </div>
-        <button type="submit">Add</button>
+        <button type="submit">Add contacts</button>
       </form>
     );
   }
