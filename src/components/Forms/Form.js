@@ -11,34 +11,35 @@ class Form extends Component {
     number: '',
     association: 'Other',
   };
-  contactId = uuid();
+
   contactIdName = uuid();
   contactIdNumber = uuid();
 
   handleChange = e => {
     console.log(e.currentTarget.value);
+    const contactId = uuid();
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
-    this.setState({ id: this.contactId });
+    this.setState({ id: contactId });
   };
 
   handleSabmit = e => {
     e.preventDefault();
     const { id, name, number, association } = this.state;
-    const contactPhone = {
+    this.setState({
       id,
       name,
       number,
       association,
-    };
-    this.setState({ contactPhone });
+    });
+    // this.setState({ contactPhone });
     this.props.propOnSubmit(this.state);
 
     this.resetForm();
   };
 
   resetForm = () => {
-    this.setState({ id: ' ', name: ' ', number: ' ', association: ' ' });
+    this.setState({ id: ' ', name: ' ', number: ' ', association: 'Other' });
   };
 
   render() {
@@ -111,7 +112,7 @@ class Form extends Component {
               onChange={this.handleChange}
               checked={this.state.association === 'Other'}
             />
-            Last
+            Other
           </label>
         </div>
         <button type="submit">Add contacts</button>
