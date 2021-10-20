@@ -109,7 +109,7 @@ class Form extends Component {
               name="association"
               value="Last"
               onChange={this.handleChange}
-              checked={this.state.association === 'Last'}
+              checked={this.state.association === 'Other'}
             />
             Last
           </label>
