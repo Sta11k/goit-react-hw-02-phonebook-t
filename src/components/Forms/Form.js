@@ -17,29 +17,29 @@ class Form extends Component {
 
   handleChange = e => {
     console.log(e.currentTarget.value);
-    const contactId = uuid();
+    // const contactId = uuid();
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
-    this.setState({ id: contactId });
+    // this.setState({ id: contactId });
   };
 
   handleSabmit = e => {
     e.preventDefault();
-    const { id, name, number, association } = this.state;
+    const { name, number, association } = this.state;
     this.setState({
-      id,
+      // id,
       name,
       number,
       association,
     });
     // this.setState({ contactPhone });
-    this.props.propOnSubmit(this.state);
+    this.props.OnSubmit(this.state);
 
     this.resetForm();
   };
 
   resetForm = () => {
-    this.setState({ id: ' ', name: ' ', number: ' ', association: 'Other' });
+    this.setState({ id: '', name: '', number: '', association: 'Other' });
   };
 
   render() {
@@ -108,7 +108,7 @@ class Form extends Component {
             <input
               type="radio"
               name="association"
-              value="Last"
+              value="Other"
               onChange={this.handleChange}
               checked={this.state.association === 'Other'}
             />

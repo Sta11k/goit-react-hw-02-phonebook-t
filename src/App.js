@@ -2,6 +2,8 @@ import './App.css';
 import { Component } from 'react';
 import Form from './components/Forms/Form';
 import TodoList from './components/Todolist/Todolist';
+import Filter from './components/Filter/Filter';
+import { v4 as uuid } from 'uuid';
 
 class App extends Component {
   state = {
@@ -34,15 +36,24 @@ class App extends Component {
     filter: '',
   };
 
-  hendlerSubmitForm = data => {
-    console.log(data);
-    this.setState(prevState => {
-      return { contactsOll: [...prevState.contactsOll, data] };
-    });
+  hendlerSubmitForm = ({ name, number, association }) => {
+    const contactId = uuid();
+    const contact = {
+      id: contactId,
+      name,
+      number,
+      association,
+    };
+    console.log('contact ', contact.name);
+    this.state.contactsOll.some(el => el.name === contact.name)
+      ? alert(`${contact.name} is already in contactsOll`)
+      : this.setState(prevState => {
+          return { contactsOll: [contact, ...prevState.contactsOll] };
+        });
   };
 
   deleteContact = contactId => {
-    console.log(contactId);
+    // console.log(contactId);
     this.setState(({ contactsOll }) => ({
       contactsOll: contactsOll.filter(contact => contact.id !== contactId),
     }));
@@ -62,13 +73,17 @@ class App extends Component {
   };
 
   render() {
-    // const {  contactsOll } = this.state;
+    const { contactsOll, filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
-    console.log(this.state.contactsOll);
+    // console.log(this.state.contactsOll);
 
     return (
       <div className="App">
-        <Form propOnSubmit={this.hendlerSubmitForm} />
+        <Form OnSubmit={this.hendlerSubmitForm} />
+        {contactsOll.length > 1 && (
+          <Filter value={filter} onChange={this.changeFilter} />
+        )}
+
         <TodoList
           contactsOll={visibleContacts}
           onDeleteContact={this.deleteContact}
@@ -79,5 +94,3 @@ class App extends Component {
 }
 
 export default App;
-
-// https://github.com/flamesty/goit-react-hw-02-phonebook/blob/main/src/App.js
